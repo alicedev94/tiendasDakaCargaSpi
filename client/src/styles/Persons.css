@@ -1,0 +1,10 @@
+.box-container{
+    display: flex;
+    justify-content: center;
+}
+.colum-1{
+    margin-right: 2%;
+}
+.textField {
+  padding-top: 20%;
+}
