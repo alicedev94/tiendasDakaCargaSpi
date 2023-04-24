@@ -8,7 +8,8 @@ const {
   namePutLog,
   nameDestroyLog,
 } = require("../controllers/eoPersonaController");
-const { apiKey } = require("../middlewares/auth");
+const { nameNewUser } = require("../controllers/nameUsers");
+const { apiKey, singUp } = require("../middlewares/singUp");
 
 // GET
 router.get("/query", async (req, res) => {
@@ -34,6 +35,16 @@ router.post("/nameNewLog", async (req, res) => {
 
 router.post("/taRelacionPuesto", async (req, res) => {
   const rta = await query2Sql(req.body);
+  res.json(rta);
+});
+
+router.post("/user/singup", singUp, async (req, res) => {
+  const rta = { dev: "alicedev94" };
+  res.json(rta);
+});
+
+router.post("/user/singin", async (req, res) => {
+  const rta = await nameNewUser(req.body);
   res.json(rta);
 });
 
