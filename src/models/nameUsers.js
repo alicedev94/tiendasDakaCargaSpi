@@ -13,7 +13,7 @@ const nameUsersSchema = {
   password: {
     field: "password",
     allowNull: false,
-    type: DataTypes.STRING(30),
+    type: DataTypes.STRING(100),
   },
   rol: {
     field: "rol_user",
