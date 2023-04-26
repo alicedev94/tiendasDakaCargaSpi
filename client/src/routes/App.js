@@ -7,16 +7,23 @@ import Login from "../components/login";
 import { Container } from "@mui/material";
 
 export default function App() {
+  let nav;
+  const isLoggedIn = false;
+
+  if (isLoggedIn) {
+    nav = <Nav />;
+  }
+
   return (
     <BrowserRouter>
-      <Nav />
+      {nav}
       <Container>
         <Routes>
-          <Route path="/" element={<ExportDefaultToolbar />} />
+          <Route path="/" element={<Login />} />
           <Route path="/crear un nuevo usuario" element={<Persons />} />
           <Route path="/usuarios/edi/:id" element={<Persons />} />
           <Route path="/Infotable" element={<Infotable />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/ExportDefaultToolbar" element={<ExportDefaultToolbar />} />
         </Routes>
       </Container>
     </BrowserRouter>

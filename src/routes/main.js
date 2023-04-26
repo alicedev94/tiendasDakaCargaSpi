@@ -11,6 +11,7 @@ const {
 const { nameNewUser } = require("../controllers/nameUsers");
 const { singUp } = require("../middlewares/singUp");
 const { singIn } = require("../middlewares/singIn");
+const { singToken, verifyToken, jwt } = require("../middlewares/serviceToken");
 
 // GET
 router.get("/query", async (req, res) => {
@@ -39,7 +40,7 @@ router.post("/taRelacionPuesto", async (req, res) => {
   res.json(rta);
 });
 
-router.post("/user/singup", singUp, async (req, res) => {
+router.post("/user/singup", singUp ,async (req, res) => {
   const rta = { status: "singup" };
   res.json(rta);
 });

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "devW": "webpack -d -w",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "oracledb": "^5.5.0",
     "sequelize": "^6.29.0"
   },

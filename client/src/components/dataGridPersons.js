@@ -45,13 +45,12 @@ export default function DataGridDemo() {
     const data = await res.json();
     setLogs(data);
   }
-
-  async function fetchData2() {
+  /*async function fetchData2() {
     const res = await fetch(`http://localhost:5000/api/v1/query`);
     const data = await res.json();
     setLogs(data);
   }
-  
+  */
   async function deleteLog(id) {
     await fetch(`http://localhost:5000/api/v1/nameDestroyLog/${id}`, {
       method: "DELETE",
@@ -68,6 +67,33 @@ export default function DataGridDemo() {
     deleteLog(idRow);
     window.location.reload();
   };
+
+  const bol = true;
+  let content;
+
+  if (bol) {
+    content = (
+      <Button
+        variant="outlined"
+        color="error"
+        disabled={false}
+        onClick={handleDelete}
+      >
+        ELIMINAR REGISTRO
+      </Button>
+    );
+  } else {
+    content = (
+      <Button
+        variant="outlined"
+        color="error"
+        disabled={false}
+        onClick={handleDelete}
+      >
+        ELIMINAR REGISTRO 2
+      </Button>
+    );
+  }
 
   useEffect(() => {
     fetchData();
@@ -101,14 +127,7 @@ export default function DataGridDemo() {
       >
         EDITAR REGISTRO
       </Button>
-      <Button
-        variant="outlined"
-        color="error"
-        disabled={false}
-        onClick={handleDelete}
-      >
-        ELIMINAR REGISTRO
-      </Button>
+      {content}
     </>
   );
 }

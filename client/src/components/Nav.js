@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 const pages = ["CREAR UN NUEVO USUARIO", "ADMINISTRAR", "SUCURSAL: VALENCIA"]; // Elementos de la lista
 const settings = ["Perfil", "Cuenta", "Panel", "Cerrar sesión"]; // Configuraciones de la lista
 
+const bol = false;
+
 function Nav() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();

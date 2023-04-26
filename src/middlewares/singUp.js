@@ -15,10 +15,11 @@ const singUp = async (req, res, next) => {
       res.json({ error: "Las contraseñas no coinciden." });
     } else {
       const passCrypt = await bcrypt.hash(password, saltRounds);
-      await sequelize.models.nameUsers.create({
+      const user = await sequelize.models.nameUsers.create({
         email: email,
         password: passCrypt,
       });
+      return user.dataValues;
       next();
     }
   }
