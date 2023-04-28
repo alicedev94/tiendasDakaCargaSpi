@@ -5,9 +5,9 @@ const { nameUsersSchema, NameUsers } = require("../models/nameUsers");
 
 function setupModels(sequelize) {
   NameEoPersonas.init(nameEoPersonasSchema,NameEoPersonas.config(sequelize));
-  NameTaRelacionPuesto.init(nameTaRelacionPuestosSchema,NameTaRelacionPuesto.config(sequelize));
-  NameTaRelacionLaboral.init(nameTaRelacionLaboralSchema,NameTaRelacionLaboral.config(sequelize));
-  NameUsers.init(nameUsersSchema,NameUsers.config(sequelize));
+  //NameTaRelacionPuesto.init(nameTaRelacionPuestosSchema,NameTaRelacionPuesto.config(sequelize));
+  //NameTaRelacionLaboral.init(nameTaRelacionLaboralSchema,NameTaRelacionLaboral.config(sequelize));
+  //NameUsers.init(nameUsersSchema,NameUsers.config(sequelize));
 }
 
 module.exports = setupModels;

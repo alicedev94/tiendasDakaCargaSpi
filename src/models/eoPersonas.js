@@ -1,15 +1,16 @@
 // TABLA EO_PERSONA- PERSONAS
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
-const tableName = "NAME_EO_PERSONAS";
+const tableName = "NAME_EO_PERSONA";
 const modelName = "modelNameEoPersonas";
 
 const nameEoPersonasSchema = {
-  /* id: {
-    allowNull: true,
-    type: DataTypes.TEXT,
+  id: {
+    field: "ID",
+    allowNull: false, // valor autoincrementable
+    type: DataTypes.NUMBER,
+    primaryKey: true
   },
-  */
   nombreUno: {
     field: "NOMBRE1",
     allowNull: false,
@@ -22,7 +23,7 @@ const nameEoPersonasSchema = {
   },
   apellidoUno: {
     field: "APELLIDO1",
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.STRING(17),
   },
   apellidoDos: {
@@ -37,9 +38,9 @@ const nameEoPersonasSchema = {
   },
   nacionalidad: {
     field: "NACIONAL",
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.STRING(50),
-  },
+  }, // SELECT A ...
   numeroIdentificacion: {
     field: "NUM_IDEN",
     allowNull: true,
@@ -52,9 +53,8 @@ const nameEoPersonasSchema = {
   },
   fechaNacimiento: {
     field: "FECHA_NA",
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW,
   },
   ciudadNacimiento: {
     field: "CIUDAD_NA",
@@ -73,7 +73,7 @@ const nameEoPersonasSchema = {
   },
   sexo: {
     field: "SEXO",
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.STRING(1),
   },
   edoCivil: {
@@ -83,18 +83,18 @@ const nameEoPersonasSchema = {
   },
   manoDominante: {
     field: "ZURDO",
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.NUMBER(1),
   },
   tipoSangre: {
     field: "TIPO_SANGRE",
     allowNull: true,
-    type: DataTypes.STRING(10), // 2
+    type: DataTypes.STRING(2), 
   },
   factorRh: {
     field: "FACTOR_RH",
     allowNull: true,
-    type: DataTypes.STRING(10), // 1
+    type: DataTypes.STRING(1), 
   },
   direccion: {
     field: "DIRECCION",
@@ -109,7 +109,7 @@ const nameEoPersonasSchema = {
   idEntidadFederalResidencial: {
     field: "ID_ENTFE",
     allowNull: true,
-    type: DataTypes.STRING(10), // 4
+    type: DataTypes.STRING(4), 
   },
   idPais: {
     field: "ID_PAIS",
@@ -154,12 +154,12 @@ const nameEoPersonasSchema = {
   emailUno: {
     field: "E_MAIL1",
     allowNull: true,
-    type: DataTypes.STRING(25), // 15
+    type: DataTypes.STRING(60), 
   },
   emailDos: {
     field: "E_MAIL2",
     allowNull: true,
-    type: DataTypes.STRING(25), // 15
+    type: DataTypes.STRING(60), 
   },
   inRelTrab: {
     field: "IN_REL_TRAB",
@@ -175,30 +175,118 @@ const nameEoPersonasSchema = {
     field: "USRCRE",
     allowNull: true,
     type: DataTypes.STRING(60),
+    /*Usuario que creo la empresa en el sistema*/
   },
   feccre: {
     field: "FECCRE",
     allowNull: false,
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
+    /*Fecha en cual se registro la empresaen el sistema*/
   },
   usract: {
     field: "USRACT",
     allowNull: true,
     type: DataTypes.STRING(60),
+    /*Ultimo usuario que hizo algÃºn cambio en los datos de la empresa*/
   },
   fecact: {
     field: "FECACT",
-    allowNull: false,
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW,
-  },
-  /*registro: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: "FECHA_REGISTRO",
     defaultValue: Sequelize.NOW,
-  },*/
+    /*Fecha en la cual se hizo el Ãºltimo cambio en los datos de la empresa*/
+  },// Verificado
+  nombreFoto: {
+    field: "NOMBRE_FOTO",
+    allowNull: true,
+    type: DataTypes.STRING(128),
+    defaultValue: null,
+  },
+  ENFERMEDADOCU: {
+    field: "ENFERMEDADOCU",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta enfermedad ocupacional*/
+  },
+  ETNIAINDIGENA: {
+    field: "ETNIAINDIGENA",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta enfermedad ocupacional*/
+  },
+  ETNIAINDIGENA: {
+    field: "ETNIAINDIGENA",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Pertenece a una etnia indigena*/
+  },
+  DISCAUDITIVA: {
+    field: "DISCAUDITIVA",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta discapacidad auditiva*/
+  },
+  DISCVISUAL: {
+    field: "DISCVISUAL",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta discapacidad visual*/
+  },
+  DISCINTELECTUAL: {
+    field: "DISCINTELECTUAL",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta discapacidad intelectual*/
+  },
+  DISCMENTAL: {
+    field: "DISCMENTAL",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta discapacidad Mental*/
+  },
+  DISCMUSCULOESQ: {
+    field: "DISCMUSCULOESQ",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Presenta discapacidad musculo esqueletica*/
+  },
+  DISCACCIDENTE: {
+    field: "DISCACCIDENTE",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Discapacidad generada por accidente de trabajo*/
+  },
+  DISCOTRA: {
+    field: "DISCOTRA",
+    allowNull: true,
+    type: DataTypes.STRING(1),
+    defaultValue: 0,
+    /*Posee otra discapacidad*/
+  },
+  DESCRIDISCA: {
+    field: "DESCRIDISCA",
+    allowNull: true,
+    type: DataTypes.STRING(50),
+    defaultValue: null,
+    /*DescripciÃ³n de la otra discapacidad*/
+  },
+  U_VERIFY: {
+    field: "U_VERIFY",
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    /*Bandera de verificación por admin*/
+  },
 };
 
 class NameEoPersonas extends Model {

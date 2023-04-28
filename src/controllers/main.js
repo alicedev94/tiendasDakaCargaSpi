@@ -1,6 +1,6 @@
 const sequelize = require("../lib/sequelize");
 const { Sequelize } = require("sequelize");
-
+//Ultimo id + 1
 const querySql = async () => {
   const [data] = await sequelize.query(`SELECT * FROM ar_spi_err`);
   console.log(data);
@@ -56,57 +56,55 @@ const query2Sql = async (body) => {
     discaccidente,
     discotra,
     descridisca
-)
-VALUES
-    (
-        84195370, -- Ultimo id + 1
-        '${body.nombreUno}',
-        '${body.segundoNombre}',
-        '${body.apellidoUno}',
-        '${body.apellidoDos}',
-        '${body.idTipoIdentificacion}',
-        '${body.nacionalidad}',
-        '${body.numeroIdentificacion}',
-        '${body.pasaporte}', 
-        '250512',
-        '${body.ciudadNacimiento}',
-        '${body.idEntidadFederal}',
-        '${body.idPaisNacimiento}',
-        '${body.sexo}',
-        '${body.edoCivil}',
-        '${body.manoDominante}',
-        '${body.tipoSangre}',
-        'P',
-        '${body.direccion}',
-        '${body.ciudad}',
-        'SON4',
-        '${body.idPais}',
-        '${body.parroquia}',
-        '${body.municipio}',
-        '${body.codPostal}',
-        '${body.telefono1}',
-        '${body.telefono2}',
-        '${body.fax}',
-        '${body.celular}',
-        '${body.emailUno}',
-        '${body.emailDos}',
-        'u',
-        '${body.usrcree}',
-        '250512', -- FECHA CRE ---revisar 
-        null, -- USUARIO DE MODIFICACIÓN
-        '250512', -- FEACT
-        null, -- NOMBRE_FOTO
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        null
-    );`);
+) VALUES (
+    5,
+    '${body.nombreUno}',
+    '${body.segundoNombre}',
+    '${body.apellidoUno}',
+    '${body.apellidoDos}',
+    '${body.idTipoIdentificacion}',
+    '${body.nacionalidad}',
+    '${body.numeroIdentificacion}',
+    '${body.pasaporte}',
+    '250512',
+    '${body.ciudadNacimiento}',
+    '${body.idEntidadFederal}',
+    '${body.idPaisNacimiento}',
+    '${body.sexo}',
+    '${body.edoCivil}',
+    '${body.manoDominante}',
+    '${body.tipoSangre}',
+    'P',
+    '${body.direccion}',
+    '${body.ciudad}',
+    'SON4',
+    '${body.idPais}',
+    '${body.parroquia}',
+    '${body.municipio}',
+    '${body.codPostal}',
+    '${body.telefono1}',
+    '${body.telefono2}',
+    '${body.fax}',
+    '${body.celular}',
+    '${body.emailUno}',
+    '${body.emailDos}',
+    'u',
+    '${body.usrcree}',
+    '250512', 
+    null, 
+    '250512', 
+    null, 
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    null
+  );`);
   return rta;
 };
 

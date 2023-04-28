@@ -8,7 +8,7 @@ import { Container } from "@mui/material";
 
 export default function App() {
   let nav;
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   if (isLoggedIn) {
     nav = <Nav />;
@@ -19,11 +19,12 @@ export default function App() {
       {nav}
       <Container>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<ExportDefaultToolbar />} />
           <Route path="/crear un nuevo usuario" element={<Persons />} />
           <Route path="/usuarios/edi/:id" element={<Persons />} />
           <Route path="/Infotable" element={<Infotable />} />
           <Route path="/ExportDefaultToolbar" element={<ExportDefaultToolbar />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Container>
     </BrowserRouter>

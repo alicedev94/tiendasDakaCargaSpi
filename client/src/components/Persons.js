@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function Persons() {
   const [dataPerson, setDataPerson] = useState({
+    id: 3, // id para la tabla relacion puesto
     nombreUno: "",
     segundoNombre: "",
     apellidoUno: "",
@@ -19,18 +20,19 @@ export default function Persons() {
     idTipoIdentificacion: "",
     nacionalidad: "",
     numeroIdentificacion: "",
-    pasaporte: "PD",
+    pasaporte: "",
+    fechaNacimiento: "",
     ciudadNacimiento: "",
     idEntidadFederal: "",
     idPaisNacimiento: "",
     sexo: "",
     edoCivil: "",
-    manoDominante: 1,
+    manoDominante: "",
     tipoSangre: "",
     factorRh: "",
     direccion: "",
-    ciudad: "PorDefinir",
-    idEntidadFederalResidencial: "PorDefinir",
+    ciudad: "", 
+    idEntidadFederalResidencial: "", 
     idPais: "",
     parroquia: "",
     municipio: "",
@@ -41,9 +43,9 @@ export default function Persons() {
     celular: "",
     emailUno: "",
     emailDos: "",
-    inRelTrab: "0",
-    usrcree: "NAME_DEFAULT_SYSTEM",
-    usract: "NAME_DEFAULT_SYSTEM",
+    inRelTrab: "0", // asignar valor dinamico para la relacion de tablas
+    usrcree: "NAME_DEFAULT_SYSTEM", // usuario que realiza la operacion
+    usract: "NAME_DEFAULT_SYSTEM", // usuario que actuliza la operacion
   });
   const [editing, setEditing] = useState(false);
   const navigate = useNavigate();
@@ -53,6 +55,7 @@ export default function Persons() {
     const res = await fetch(`http://localhost:5000/api/v1/nameGetLog/${id}`);
     const data = await res.json();
     setDataPerson({
+      id: data.id,
       nombreUno: data.nombreUno,
       segundoNombre: data.segundoNombre,
       apellidoUno: data.apellidoUno,
@@ -61,6 +64,7 @@ export default function Persons() {
       nacionalidad: data.nacionalidad,
       numeroIdentificacion: data.numeroIdentificacion,
       pasaporte: data.pasaporte,
+      fechaNacimiento: data.fechaNacimiento, // fecha de nacimiento
       ciudadNacimiento: data.ciudadNacimiento,
       idEntidadFederal: data.idEntidadFederal,
       idPaisNacimiento: data.idPaisNacimiento,
@@ -81,7 +85,7 @@ export default function Persons() {
       fax: data.fax,
       celular: data.celular,
       emailUno: data.emailUno,
-      emailDos: data.emailDos,
+      emailDos: data.emailDos, //31 todos los campos que envia el cliente (Agregar campos faltantes)
     });
     setEditing(true);
   }
@@ -153,6 +157,17 @@ export default function Persons() {
     {
       value: "ve",
       label: "Venezolano",
+    },
+  ];
+
+  const manoDominante = [
+    {
+      value: 0,
+      label: "Derecha",
+    },
+    {
+      value: 1,
+      label: "Izquierda",
     },
   ];
 
@@ -301,24 +316,56 @@ export default function Persons() {
             onChange={handlerChange}
           />
         </div>
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Sexo"
-          name="sexo"
-          value={dataPerson.sexo}
-          defaultValue=" "
-          variant="filled"
-          color="primary"
-          focused
-          onChange={handlerChange}
-        >
-          {sexo.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+        <div>
+          <TextField
+            id="input-with-icon-textfield"
+            label="Pasaporte"
+            name="pasaporte"
+            value={dataPerson.pasaporte}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start"></InputAdornment>
+              ),
+            }}
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          />
+        </div>
+        <div>
+          <TextField
+            id="input-with-icon-textfield"
+            label="Fecha de Nacimiento"
+            name="fechaNacimiento"
+            type="date"
+            value={dataPerson.fehaNacimiento}
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          />
+        </div>
+        <div>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Sexo"
+            name="sexo"
+            value={dataPerson.sexo}
+            defaultValue=" "
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          >
+            {sexo.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
       </div>
       <div style={{ marginLeft: -23 }} className="colum-2">
         <div className="textField">
@@ -332,6 +379,26 @@ export default function Persons() {
             focused
             onChange={handlerChange}
           />
+        </div>
+        <div>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Mano Dominante"
+            name="manoDominante"
+            value={dataPerson.manoDominante}
+            defaultValue=" "
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          >
+            {manoDominante.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </div>
         <div>
           <TextField
@@ -445,10 +512,8 @@ export default function Persons() {
             ))}
           </TextField>
         </div>
-      </div>
-      <div className="colum-3">
-        <div className="textField">
-          <TextField
+        <diV>
+        <TextField
             id="input-with-icon-textfield"
             label="Direción"
             name="direccion"
@@ -458,6 +523,48 @@ export default function Persons() {
             focused
             onChange={handlerChange}
           />
+        </diV>
+      </div>
+      <div className="colum-3">
+        <div className="textField">
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Ciudad"
+            name="ciudad"
+            value={dataPerson.ciudad}
+            defaultValue=" "
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          >
+            {sexo.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        <div>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Entidad Referencial"
+            name="idEntidadFederalResidencial"
+            value={dataPerson.idEntidadFederalResidencial}
+            defaultValue=" "
+            variant="filled"
+            color="primary"
+            focused
+            onChange={handlerChange}
+          >
+            {sexo.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </div>
         <div>
           <TextField
@@ -555,9 +662,7 @@ export default function Persons() {
             onChange={handlerChange}
           />
         </div>
-      </div>
-      <div className="colum-4">
-        <div className="textField">
+        <div>
           <TextField
             id="input-with-icon-textfield"
             label="Fax"
@@ -569,7 +674,9 @@ export default function Persons() {
             onChange={handlerChange}
           />
         </div>
-        <div>
+      </div>
+      <div className="colum-4">
+        <div className="textField">
           <TextField
             id="input-with-icon-textfield"
             label="Celular"
