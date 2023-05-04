@@ -31,8 +31,8 @@ export default function Persons() {
     tipoSangre: "",
     factorRh: "",
     direccion: "",
-    ciudad: "", 
-    idEntidadFederalResidencial: "", 
+    ciudad: "",
+    idEntidadFederalResidencial: "",
     idPais: "",
     parroquia: "",
     municipio: "",
@@ -180,13 +180,14 @@ export default function Persons() {
         headers: { "Content-Type": "application/json" },
       });
     } else {
-      await fetch(`http://localhost:5000/api/v1/nameNewLog`, {
+      const rta = await fetch(`http://localhost:5000/api/v1/nameNewLog`, {
         method: "POST",
         body: JSON.stringify(dataPerson),
         headers: { "Content-Type": "application/json" },
       });
+      console.log(rta);
     }
-    navigate("/");
+   // navigate("/");
   };
 
   const sendTest = async () => {
@@ -196,7 +197,7 @@ export default function Persons() {
       body: JSON.stringify(dataPerson),
       headers: { "Content-Type": "application/json" },
     });
-    navigate("/");
+   // navigate("/");
   };
 
   const handlerChange = (event) => {
@@ -513,7 +514,7 @@ export default function Persons() {
           </TextField>
         </div>
         <diV>
-        <TextField
+          <TextField
             id="input-with-icon-textfield"
             label="Direción"
             name="direccion"

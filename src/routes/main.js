@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const { querySql, query2Sql } = require("../controllers/main");
+const { querySql, query2Sql, nameNewLog } = require("../controllers/main");
 const {
-  nameNewLog,
+  //nameNewLog,
   nameGetLog,
   nameGetLogId,
   namePutLog,
@@ -12,6 +12,7 @@ const { nameNewUser } = require("../controllers/nameUsers");
 const { singUp } = require("../middlewares/singUp");
 const { singIn } = require("../middlewares/singIn");
 const { singToken, verifyToken, jwt } = require("../middlewares/serviceToken");
+const { Joi, schema } = require("../middlewares/formValidation/");
 
 // GET
 router.get("/query", async (req, res) => {
@@ -31,8 +32,7 @@ router.get("/nameGetLog/:id", async (req, res) => {
 
 // POST
 router.post("/nameNewLog", async (req, res) => {
-  const rta = await nameNewLog(req.body);
-  res.json(rta);
+  await nameNewLog(req.body);
 });
 
 router.post("/taRelacionPuesto", async (req, res) => {
@@ -40,7 +40,7 @@ router.post("/taRelacionPuesto", async (req, res) => {
   res.json(rta);
 });
 
-router.post("/user/singup", singUp ,async (req, res) => {
+router.post("/user/singup", singUp, async (req, res) => {
   const rta = { status: "singup" };
   res.json(rta);
 });

@@ -2,113 +2,107 @@ const sequelize = require("../lib/sequelize");
 const { Sequelize } = require("sequelize");
 //Ultimo id + 1
 const querySql = async () => {
-  const [data] = await sequelize.query(`SELECT * FROM ar_spi_err`);
-  console.log(data);
+  const [data] = await sequelize.query(`SELECT * FROM name_eo_persona`);
   return data;
 };
 
 const query2Sql = async (body) => {
-  const rta = await sequelize.query(`INSERT INTO eo_persona (
-    id,
-    nombre1,
-    nombre2,
-    apellido1,
-    apellido2,
-    id_tipo_iden,
-    nacional,
-    num_iden,
-    pasaporte,
-    fecha_na,
-    ciudad_na,
-    id_entfe_na,
-    id_pais_na,
-    sexo,
-    edo_civil,
-    zurdo,
-    tipo_sangre,
-    factor_rh,
-    direccion,
-    ciudad,
-    id_entfe,
-    id_pais,
-    parroquia,
-    municipio,
-    cod_postal,
-    telefono1,
-    telefono2,
-    fax,
-    celular,
-    e_mail1,
-    e_mail2,
-    in_rel_trab,
-    usrcre,
-    feccre,
-    usract,
-    fecact,
-    nombre_foto,
-    enfermedadocu,
-    etniaindigena,
-    discauditiva,
-    discvisual,
-    discintelectual,
-    discmental,
-    discmusculoesq,
-    discaccidente,
-    discotra,
-    descridisca
-) VALUES (
-    5,
-    '${body.nombreUno}',
-    '${body.segundoNombre}',
-    '${body.apellidoUno}',
-    '${body.apellidoDos}',
-    '${body.idTipoIdentificacion}',
-    '${body.nacionalidad}',
-    '${body.numeroIdentificacion}',
-    '${body.pasaporte}',
-    '250512',
-    '${body.ciudadNacimiento}',
-    '${body.idEntidadFederal}',
-    '${body.idPaisNacimiento}',
-    '${body.sexo}',
-    '${body.edoCivil}',
-    '${body.manoDominante}',
-    '${body.tipoSangre}',
-    'P',
-    '${body.direccion}',
-    '${body.ciudad}',
-    'SON4',
-    '${body.idPais}',
-    '${body.parroquia}',
-    '${body.municipio}',
-    '${body.codPostal}',
-    '${body.telefono1}',
-    '${body.telefono2}',
-    '${body.fax}',
-    '${body.celular}',
-    '${body.emailUno}',
-    '${body.emailDos}',
-    'u',
-    '${body.usrcree}',
-    '250512', 
-    null, 
-    '250512', 
-    null, 
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    null
-  );`);
+  const rta = await sequelize.query(`BEGIN
+  INSERT INTO 
+    "INFOCENT"."NAME_EO_PERSONA" 
+      (ID, 
+        NOMBRE1, 
+        NOMBRE2, 
+        APELLIDO1, 
+        APELLIDO2, 
+        ID_TIPO_IDEN, 
+        NACIONAL,
+        NUM_IDEN, 
+        FECHA_NA, 
+        ID_ENTFE_NA, 
+        ID_PAIS_NA, 
+        SEXO, 
+        EDO_CIVIL, 
+        ZURDO, 
+        DIRECCION, 
+        ID_ENTFE, 
+        ID_PAIS, 
+        TELEFONO1, 
+        CELULAR, 
+        E_MAIL1, 
+        USRCRE, 
+        FECCRE, 
+        USRACT, 
+        FECACT, 
+        ENFERMEDADOCU, 
+        ETNIAINDIGENA, 
+        DISCAUDITIVA, 
+        DISCVISUAL, 
+        DISCINTELECTUAL, 
+        DISCMENTAL, 
+        DISCMUSCULOESQ, 
+        DISCACCIDENTE, 
+        DISCOTRA,
+        U_VERIFY
+        ) 
+    VALUES ('6', 'JANY', 'GABRIELA', 'PEREIRA', 'GIEMENZ', '1', 'Venezolana', '30039419', 
+      TO_DATE('26/09/02', 'DD/MM/RR'), 'CB', 'VEN', '2', 'S', '0', 'SAN DIEGO', 'CB', 'VEN', '4144068829', '4144068829', 'JANYP26@GMAIL.COM', 'INFOCENT', 
+      TO_DATE('03/05/23', 'DD/MM/RR'), 'INFOCENT', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0', '1');
+  COMMIT;
+END;`);
+  return rta;
+};
+
+const nameNewLog = async (body) => {
+  const rta = await sequelize.query(`
+  BEGIN
+    INSERT INTO 
+      "INFOCENT"."NAME_EO_PERSONA" 
+        (ID, 
+          NOMBRE1, 
+          NOMBRE2, 
+          APELLIDO1, 
+          APELLIDO2, 
+          ID_TIPO_IDEN, 
+          NACIONAL,
+          NUM_IDEN, 
+          FECHA_NA, 
+          ID_ENTFE_NA, 
+          ID_PAIS_NA, 
+          SEXO, 
+          EDO_CIVIL, 
+          ZURDO, 
+          DIRECCION, 
+          ID_ENTFE, 
+          ID_PAIS, 
+          TELEFONO1, 
+          CELULAR, 
+          E_MAIL1, 
+          USRCRE, 
+          FECCRE, 
+          USRACT, 
+          FECACT, 
+          ENFERMEDADOCU, 
+          ETNIAINDIGENA, 
+          DISCAUDITIVA, 
+          DISCVISUAL, 
+          DISCINTELECTUAL, 
+          DISCMENTAL, 
+          DISCMUSCULOESQ, 
+          DISCACCIDENTE, 
+          DISCOTRA
+          ) 
+        VALUES ('7', '${body.nombreUno}', '${body.segundoNombre}', '${body.apellidoUno}', '${body.apellidoDos}', '${body.idTipoIdentificacion}', '${body.nacionalidad}', '${body.numeroIdentificacion}', 
+        TO_DATE('03/05/23', 'DD/MM/RR'), 'DD', 'DD', 'D', '${body.edoCivil}', '${body.manoDominante}', '${body.direccion}', 'DDDD', 'DDDD', '${body.telefono1}', '${body.celular}', '${body.emailUno}', 'CLIENTE', 
+        TO_DATE('03/05/23', 'DD/MM/RR'), 'CLIENTE', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0');
+    COMMIT;
+  END;`);
+  console.log(body.fechaNacimiento);
   return rta;
 };
 
 module.exports = {
   querySql,
   query2Sql,
+  nameNewLog,
 };
