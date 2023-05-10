@@ -1,7 +1,7 @@
 const { nameEoPersonasSchema, NameEoPersonas } = require("../models/eoPersonas");
-const { nameTaRelacionPuestosSchema, NameTaRelacionPuesto } = require("../models/taRelacionPuesto");
-const { nameTaRelacionLaboralSchema, NameTaRelacionLaboral } = require("../models/taRelLaboral");
-const { nameUsersSchema, NameUsers } = require("../models/nameUsers");
+//const { nameTaRelacionPuestosSchema, NameTaRelacionPuesto } = require("../models/taRelacionPuesto");
+//const { nameTaRelacionLaboralSchema, NameTaRelacionLaboral } = require("../models/taRelLaboral");
+//const { nameUsersSchema, NameUsers } = require("../models/nameUsers");
 
 function setupModels(sequelize) {
   NameEoPersonas.init(nameEoPersonasSchema,NameEoPersonas.config(sequelize));

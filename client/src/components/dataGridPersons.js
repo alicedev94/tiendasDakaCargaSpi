@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
+const ipGet = `http://192.168.25.92:5000/api/v1/nameGetLog`;
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -29,7 +30,13 @@ const columns = [
   {
     field: "feccre",
     headerName: "Fecha De Creación",
-    width: 150,
+    width: 250,
+    editable: false,
+  },
+  {
+    field: "U_VERIFY",
+    headerName: "EN SPI",
+    width: 70,
     editable: false,
   },
 ];
@@ -41,7 +48,7 @@ export default function DataGridDemo() {
   const params = useParams();
 
   async function fetchData() {
-    const res = await fetch(`http://localhost:5000/api/v1/nameGetLog`);
+    const res = await fetch(ipGet);
     const data = await res.json();
     setLogs(data);
   }

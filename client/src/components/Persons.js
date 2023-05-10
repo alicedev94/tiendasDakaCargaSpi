@@ -86,6 +86,7 @@ export default function Persons() {
       celular: data.celular,
       emailUno: data.emailUno,
       emailDos: data.emailDos, //31 todos los campos que envia el cliente (Agregar campos faltantes)
+      U_VERIFY: 0,
     });
     setEditing(true);
   }
@@ -187,7 +188,7 @@ export default function Persons() {
       });
       console.log(rta);
     }
-   // navigate("/");
+    navigate("/");
   };
 
   const sendTest = async () => {
@@ -197,7 +198,16 @@ export default function Persons() {
       body: JSON.stringify(dataPerson),
       headers: { "Content-Type": "application/json" },
     });
-   // navigate("/");
+    navigate("/");
+  };
+
+  const verifyData = async () => {
+    await fetch(`http://localhost:5000/api/v1/namePutStatusSpi/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(dataPerson),
+      headers: { "Content-Type": "application/json" },
+    });
+    navigate("/");
   };
 
   const handlerChange = (event) => {
@@ -731,6 +741,16 @@ export default function Persons() {
         >
           TEST
         </Button>
+        <div style={{ marginTop: "80%" }}>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={verifyData}
+            style={{ marginTop: "5%", marginLeft: "5%" }}
+          >
+            VERIFICAR DATOS
+          </Button>
+        </div>
       </div>
     </Box>
   );

@@ -1,8 +1,8 @@
 // TABLA EO_PERSONA- PERSONAS
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
-const tableName = "NAME_USERS";
-const modelName = "nameUsers";
+const tableName = "NAME_MASTER_USERS";
+const modelName = "modelMasterUsers";
 
 const nameUsersSchema = {
   email: {
@@ -32,7 +32,7 @@ class NameUsers extends Model {
     return {
       sequelize,
       tableName: tableName,
-      modelName: "nameUsers",
+      modelName: modelName,
       timestamps: false,
       createdAt: true,
       updatedAt: false,

@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize  } = require("sequelize");
 const setupModels = require("../models/index");
 require("dotenv").config();
 
-const sequelize = new Sequelize(
+const sequelize  = new Sequelize(
   process.env.SERVICE_NAME,
   process.env.DB_USER,
   process.env.DB_PASSWORD,

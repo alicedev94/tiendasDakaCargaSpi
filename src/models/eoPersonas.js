@@ -284,7 +284,7 @@ const nameEoPersonasSchema = {
     field: "U_VERIFY",
     allowNull: false,
     type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    defaultValue: 0,
     /*Bandera de verificación por admin*/
   },
 };

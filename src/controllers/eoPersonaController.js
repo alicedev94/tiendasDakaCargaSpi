@@ -16,11 +16,36 @@ const nameNewLog = async (data) => {
 };
 
 const namePutLog = async (id, nombre) => {
-  const rta = await sequelize.models.modelNameEoPersonas.update({ nombreUno: nombre }, {
-    where: {
-      id: id
+  const rta = await sequelize.models.modelNameEoPersonas.update(
+    { nombreUno: nombre },
+    {
+      where: {
+        id: id,
+      },
     }
-  });
+  );
+  return rta;
+};
+
+const namePutStatusSpi = async (id, status) => {
+  const rta = await sequelize.models.modelNameEoPersonas.update(
+    { U_VERIFY: status },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  return rta;
+};
+
+const execStoradeProcedure = async () => {
+  const rta = await sequelize.query(`
+    BEGIN
+      CARGA_SPI();
+      COMMIT;
+    END;
+    `);
   return rta;
 };
 
@@ -37,6 +62,8 @@ module.exports = {
   nameNewLog,
   nameGetLog,
   nameGetLogId,
+  namePutStatusSpi,
   namePutLog,
   nameDestroyLog,
+  execStoradeProcedure,
 };

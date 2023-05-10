@@ -6,13 +6,16 @@ const {
   nameGetLog,
   nameGetLogId,
   namePutLog,
+  namePutStatusSpi,
   nameDestroyLog,
+  execStoradeProcedure,
 } = require("../controllers/eoPersonaController");
 const { nameNewUser } = require("../controllers/nameUsers");
 const { singUp } = require("../middlewares/singUp");
 const { singIn } = require("../middlewares/singIn");
 const { singToken, verifyToken, jwt } = require("../middlewares/serviceToken");
 const { Joi, schema } = require("../middlewares/formValidation/");
+const passport = require("passport");
 
 // GET
 router.get("/query", async (req, res) => {
@@ -30,6 +33,11 @@ router.get("/nameGetLog/:id", async (req, res) => {
   res.json(rta);
 });
 
+router.get('/user/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+});
+
 // POST
 router.post("/nameNewLog", async (req, res) => {
   await nameNewLog(req.body);
@@ -40,15 +48,25 @@ router.post("/taRelacionPuesto", async (req, res) => {
   res.json(rta);
 });
 
-router.post("/user/singup", singUp, async (req, res) => {
-  const rta = { status: "singup" };
+router.post("/newUser", async (req, res) => {
+  const rta = await nameNewUser(req.body);
   res.json(rta);
 });
 
-router.post("/user/singin", singIn, async (req, res) => {
-  const rta = { status: "singin" };
-  res.json(rta);
-});
+router.post('/user/signup', passport.authenticate('local-signup', {
+  successRedirect: '/profile',
+  failureRedirect: '/signup',
+  failureFlash: true
+})); 
+
+router.post(
+  "/user/signin",
+  passport.authenticate("local-signin", {
+    successRedirect: "/profile",
+    failureRedirect: "/signin",
+    failureFlash: true,
+  })
+);
 
 // PUT
 router.put("/namePutLog/:id", async (req, res) => {
@@ -56,6 +74,12 @@ router.put("/namePutLog/:id", async (req, res) => {
   console.log(name);
   await namePutLog(req.params["id"], name);
   res.json({ update_records: name });
+});
+
+router.put("/namePutStatusSpi/:id", async (req, res) => {
+  await namePutStatusSpi(req.params["id"], '1'); // TRUE
+  await execStoradeProcedure();
+  res.redirect("http://localhost:3000/");
 });
 
 // DELETE

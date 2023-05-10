@@ -45,9 +45,9 @@ const query2Sql = async (body) => {
         DISCOTRA,
         U_VERIFY
         ) 
-    VALUES ('6', 'JANY', 'GABRIELA', 'PEREIRA', 'GIEMENZ', '1', 'Venezolana', '30039419', 
+    VALUES ('7', 'JANY', 'GABRIELA', 'PEREIRA', 'GIEMENZ', '1', 'Venezolana', '30039419', 
       TO_DATE('26/09/02', 'DD/MM/RR'), 'CB', 'VEN', '2', 'S', '0', 'SAN DIEGO', 'CB', 'VEN', '4144068829', '4144068829', 'JANYP26@GMAIL.COM', 'INFOCENT', 
-      TO_DATE('03/05/23', 'DD/MM/RR'), 'INFOCENT', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0', '1');
+      TO_DATE('03/05/23', 'DD/MM/RR'), 'INFOCENT', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
   COMMIT;
 END;`);
   return rta;
@@ -93,7 +93,7 @@ const nameNewLog = async (body) => {
           DISCOTRA
           ) 
         VALUES ('7', '${body.nombreUno}', '${body.segundoNombre}', '${body.apellidoUno}', '${body.apellidoDos}', '${body.idTipoIdentificacion}', '${body.nacionalidad}', '${body.numeroIdentificacion}', 
-        TO_DATE('03/05/23', 'DD/MM/RR'), 'DD', 'DD', 'D', '${body.edoCivil}', '${body.manoDominante}', '${body.direccion}', 'DDDD', 'DDDD', '${body.telefono1}', '${body.celular}', '${body.emailUno}', 'CLIENTE', 
+        TO_DATE('03/05/23', 'DD/MM/RR'), 'DD', 'DD', '${body.sexo}', '${body.edoCivil}', '${body.manoDominante}', '${body.direccion}', 'DDDD', 'DDDD', '${body.telefono1}', '${body.celular}', '${body.emailUno}', 'CLIENTE', 
         TO_DATE('03/05/23', 'DD/MM/RR'), 'CLIENTE', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0');
     COMMIT;
   END;`);

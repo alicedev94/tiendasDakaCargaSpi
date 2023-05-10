@@ -74,7 +74,6 @@ function Nav() {
                 </Button>
               ))}
             </Box>
-
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Abrir Ajustes">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
