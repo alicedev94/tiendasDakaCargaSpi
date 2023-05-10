@@ -10,6 +10,11 @@ const nameGetLogId = async (id) => {
   return rta;
 };
 
+const nameGenerateIdSpi = async () => {
+  const rta = await sequelize.query(`SELECT MAX(id_pais + 1) FROM NAME_PAISES`);
+  return rta;
+};
+
 const nameNewLog = async (data) => {
   const rta = await sequelize.models.modelNameEoPersonas.create(data);
   return rta;
@@ -66,4 +71,5 @@ module.exports = {
   namePutLog,
   nameDestroyLog,
   execStoradeProcedure,
+  nameGenerateIdSpi,
 };

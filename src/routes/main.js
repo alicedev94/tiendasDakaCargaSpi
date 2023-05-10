@@ -1,14 +1,20 @@
 const { Router } = require("express");
 const router = Router();
-const { querySql, query2Sql, nameNewLog } = require("../controllers/main");
 const {
-  //nameNewLog,
+  querySql,
+  query2Sql,
+  nameNewLog2,
+  nameGetCountry,
+} = require("../controllers/main");
+const {
+  nameNewLog,
   nameGetLog,
   nameGetLogId,
   namePutLog,
   namePutStatusSpi,
   nameDestroyLog,
   execStoradeProcedure,
+  nameGenerateIdSpi,
 } = require("../controllers/eoPersonaController");
 const { nameNewUser } = require("../controllers/nameUsers");
 const { singUp } = require("../middlewares/singUp");
@@ -33,14 +39,24 @@ router.get("/nameGetLog/:id", async (req, res) => {
   res.json(rta);
 });
 
-router.get('/user/logout', (req, res, next) => {
+router.get("/user/logout", (req, res, next) => {
   req.logout();
-  res.redirect('/');
+  res.redirect("/");
+});
+
+router.get("/data/generateIdSpi", async (req, res) => {
+  const rta = await nameGenerateIdSpi();
+  res.json(rta);
+});
+
+router.get("/data/country", async (req, res) => {
+  const rta = await nameGetCountry();
+  res.json(rta);
 });
 
 // POST
 router.post("/nameNewLog", async (req, res) => {
-  await nameNewLog(req.body);
+  await nameNewLog2(req.body);
 });
 
 router.post("/taRelacionPuesto", async (req, res) => {
@@ -53,20 +69,23 @@ router.post("/newUser", async (req, res) => {
   res.json(rta);
 });
 
-router.post('/user/signup', passport.authenticate('local-signup', {
-  successRedirect: '/profile',
-  failureRedirect: '/signup',
-  failureFlash: true
-})); 
-
 router.post(
-  "/user/signin",
-  passport.authenticate("local-signin", {
-    successRedirect: "/profile",
-    failureRedirect: "/signin",
+  "/user/signup",
+  passport.authenticate("local-signup", {
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "http://localhost:3000/login",
     failureFlash: true,
   })
 );
+
+router.post("/user/signin",passport.authenticate("local-signin", {
+  successRedirect: "http://localhost:3000/",
+  failureRedirect: "http://localhost:3000/login",
+  failureFlash: true,
+}), async (req, res) => {
+  res.json({auth: true});
+});
+
 
 // PUT
 router.put("/namePutLog/:id", async (req, res) => {
@@ -77,7 +96,7 @@ router.put("/namePutLog/:id", async (req, res) => {
 });
 
 router.put("/namePutStatusSpi/:id", async (req, res) => {
-  await namePutStatusSpi(req.params["id"], '1'); // TRUE
+  await namePutStatusSpi(req.params["id"], "1"); // TRUE
   await execStoradeProcedure();
   res.redirect("http://localhost:3000/");
 });

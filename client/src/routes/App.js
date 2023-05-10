@@ -5,6 +5,7 @@ import Infotable from "../components/InfoTable";
 import ExportDefaultToolbar from "../components/dataGridPersons";
 import Login from "../components/login";
 import { Container } from "@mui/material";
+import { useState } from "react";
 
 export default function App() {
   let nav;
@@ -23,7 +24,10 @@ export default function App() {
           <Route path="/crear un nuevo usuario" element={<Persons />} />
           <Route path="/usuarios/edi/:id" element={<Persons />} />
           <Route path="/Infotable" element={<Infotable />} />
-          <Route path="/ExportDefaultToolbar" element={<ExportDefaultToolbar />} />
+          <Route
+            path="/ExportDefaultToolbar"
+            element={<ExportDefaultToolbar />}
+          />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Container>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { redirect } from "react-router-dom";
 
 export default function Login() {
   const [dataPerson, setDataPerson] = useState({
@@ -11,7 +12,7 @@ export default function Login() {
   };
 
   const sendData = async () => {
-    await fetch(`http://localhost:5000/api/v1/user/singin`, {
+    const rta = await fetch(`http://localhost:5000/api/v1/user/signin`, {
       method: "POST",
       body: JSON.stringify(dataPerson),
       headers: { "Content-Type": "application/json" },

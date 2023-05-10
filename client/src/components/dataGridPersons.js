@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ipGet = `http://192.168.25.92:5000/api/v1/nameGetLog`;
+const ipGet = `http://localhost:5000/api/v1/nameGetLog`; // http://192.168.25.92:5000/api/v1/nameGetLog
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {

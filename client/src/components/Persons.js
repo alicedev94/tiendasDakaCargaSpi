@@ -11,92 +11,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Persons() {
-  const [dataPerson, setDataPerson] = useState({
-    id: 3, // id para la tabla relacion puesto
-    nombreUno: "",
-    segundoNombre: "",
-    apellidoUno: "",
-    apellidoDos: "",
-    idTipoIdentificacion: "",
-    nacionalidad: "",
-    numeroIdentificacion: "",
-    pasaporte: "",
-    fechaNacimiento: "",
-    ciudadNacimiento: "",
-    idEntidadFederal: "",
-    idPaisNacimiento: "",
-    sexo: "",
-    edoCivil: "",
-    manoDominante: "",
-    tipoSangre: "",
-    factorRh: "",
-    direccion: "",
-    ciudad: "",
-    idEntidadFederalResidencial: "",
-    idPais: "",
-    parroquia: "",
-    municipio: "",
-    codPostal: "",
-    telefono1: "",
-    telefono2: "",
-    fax: "",
-    celular: "",
-    emailUno: "",
-    emailDos: "",
-    inRelTrab: "0", // asignar valor dinamico para la relacion de tablas
-    usrcree: "NAME_DEFAULT_SYSTEM", // usuario que realiza la operacion
-    usract: "NAME_DEFAULT_SYSTEM", // usuario que actuliza la operacion
-  });
-  const [editing, setEditing] = useState(false);
-  const navigate = useNavigate();
-  const params = useParams();
-
-  async function loadLog(id) {
-    const res = await fetch(`http://localhost:5000/api/v1/nameGetLog/${id}`);
-    const data = await res.json();
-    setDataPerson({
-      id: data.id,
-      nombreUno: data.nombreUno,
-      segundoNombre: data.segundoNombre,
-      apellidoUno: data.apellidoUno,
-      apellidoDos: data.apellidoDos,
-      idTipoIdentificacion: data.idTipoIdentificacion,
-      nacionalidad: data.nacionalidad,
-      numeroIdentificacion: data.numeroIdentificacion,
-      pasaporte: data.pasaporte,
-      fechaNacimiento: data.fechaNacimiento, // fecha de nacimiento
-      ciudadNacimiento: data.ciudadNacimiento,
-      idEntidadFederal: data.idEntidadFederal,
-      idPaisNacimiento: data.idPaisNacimiento,
-      sexo: data.sexo,
-      edoCivil: data.edoCivil,
-      manoDominante: data.manoDominante,
-      tipoSangre: data.tipoSangre,
-      factorRh: data.factorRh,
-      direccion: data.direccion,
-      //ciudad: "PorDefinir",
-      //idEntidadFederalResidencial: "PorDefinir",
-      idPais: data.idPais,
-      parroquia: data.parroquia,
-      municipio: data.municipio,
-      codPostal: data.codPostal,
-      telefono1: data.telefono1,
-      telefono2: data.telefono2,
-      fax: data.fax,
-      celular: data.celular,
-      emailUno: data.emailUno,
-      emailDos: data.emailDos, //31 todos los campos que envia el cliente (Agregar campos faltantes)
-      U_VERIFY: 0,
-    });
-    setEditing(true);
-  }
-
-  useEffect(() => {
-    if (params.id) {
-      loadLog(params.id);
-    }
-  }, [params.id]);
-
+  // DATOS TEMPORALES
   // persisistir los datos
   const typeIdintification = [
     {
@@ -172,8 +87,101 @@ export default function Persons() {
     },
   ];
 
+  const [dataPerson, setDataPerson] = useState({
+    id: "", // id para la tabla relacion puesto
+    nombreUno: "",
+    segundoNombre: "",
+    apellidoUno: "",
+    apellidoDos: "",
+    idTipoIdentificacion: "",
+    nacionalidad: "",
+    numeroIdentificacion: "",
+    pasaporte: "",
+    fechaNacimiento: "",
+    ciudadNacimiento: "",
+    idEntidadFederal: "",
+    idPaisNacimiento: "",
+    sexo: "",
+    edoCivil: "",
+    manoDominante: "",
+    tipoSangre: "",
+    factorRh: "",
+    direccion: "",
+    ciudad: "",
+    idEntidadFederalResidencial: "",
+    idPais: "",
+    parroquia: "",
+    municipio: "",
+    codPostal: "",
+    telefono1: "",
+    telefono2: "",
+    fax: "",
+    celular: "",
+    emailUno: "",
+    emailDos: "",
+    inRelTrab: "0", // asignar valor dinamico para la relacion de tablas
+    usrcree: "NAME_DEFAULT_SYSTEM", // usuario que realiza la operacion
+    usract: "NAME_DEFAULT_SYSTEM", // usuario que actuliza la operacion
+  });
+  const [countryDb, setCountryDb] = useState({});
+
+  const [editing, setEditing] = useState(false);
+  const navigate = useNavigate();
+  const params = useParams();
+
+  async function loadLog(id) {
+    const res = await fetch(`http://localhost:5000/api/v1/nameGetLog/${id}`);
+    const data = await res.json();
+    setDataPerson({
+      //id: data.id,
+      nombreUno: data.nombreUno,
+      segundoNombre: data.segundoNombre,
+      apellidoUno: data.apellidoUno,
+      apellidoDos: data.apellidoDos,
+      idTipoIdentificacion: data.idTipoIdentificacion,
+      nacionalidad: data.nacionalidad,
+      numeroIdentificacion: data.numeroIdentificacion,
+      pasaporte: data.pasaporte,
+      fechaNacimiento: data.fechaNacimiento, // fecha de nacimiento
+      ciudadNacimiento: data.ciudadNacimiento,
+      idEntidadFederal: data.idEntidadFederal,
+      idPaisNacimiento: data.idPaisNacimiento,
+      sexo: data.sexo,
+      edoCivil: data.edoCivil,
+      manoDominante: data.manoDominante,
+      tipoSangre: data.tipoSangre,
+      factorRh: data.factorRh,
+      direccion: data.direccion,
+      //ciudad: "PorDefinir",
+      //idEntidadFederalResidencial: "PorDefinir",
+      idPais: data.idPais,
+      parroquia: data.parroquia,
+      municipio: data.municipio,
+      codPostal: data.codPostal,
+      telefono1: data.telefono1,
+      telefono2: data.telefono2,
+      fax: data.fax,
+      celular: data.celular,
+      emailUno: data.emailUno,
+      emailDos: data.emailDos, //31 todos los campos que envia el cliente (Agregar campos faltantes)
+      U_VERIFY: 0,
+    });
+    setEditing(true);
+  }
+
+  async function preData() {
+    const country = await fetch(`http://localhost:5000/api/v1/data/country`);
+    setCountryDb(country);
+  }
+
+  useEffect(() => {
+    if (params.id) {
+      loadLog(params.id);
+      preData();
+    }
+  }, [params.id]);
+
   const sendData = async () => {
-    // Buscar el ultimo ID de la tabla EO_PERSONA
     if (editing) {
       await fetch(`http://localhost:5000/api/v1/namePutLog/${params.id}`, {
         method: "PUT",
@@ -181,12 +189,17 @@ export default function Persons() {
         headers: { "Content-Type": "application/json" },
       });
     } else {
+      // Buscar el ultimo ID de la tabla EO_PERSONA
+      /*const generateIdSpi = await fetch(
+        `http://localhost:5000/api/v1/data/generateIdSpi`
+      );
+      console.log(generateIdSpi);
+      setDataPerson(dataPerson.id = '100');*/
       const rta = await fetch(`http://localhost:5000/api/v1/nameNewLog`, {
         method: "POST",
         body: JSON.stringify(dataPerson),
         headers: { "Content-Type": "application/json" },
       });
-      console.log(rta);
     }
     navigate("/");
   };

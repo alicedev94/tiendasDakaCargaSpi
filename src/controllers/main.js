@@ -53,11 +53,11 @@ END;`);
   return rta;
 };
 
-const nameNewLog = async (body) => {
+const nameNewLog2 = async (body) => {
   const rta = await sequelize.query(`
   BEGIN
     INSERT INTO 
-      "INFOCENT"."NAME_EO_PERSONA" 
+      "SYSTEM"."NAME_EO_PERSONA" 
         (ID, 
           NOMBRE1, 
           NOMBRE2, 
@@ -92,7 +92,7 @@ const nameNewLog = async (body) => {
           DISCACCIDENTE, 
           DISCOTRA
           ) 
-        VALUES ('7', '${body.nombreUno}', '${body.segundoNombre}', '${body.apellidoUno}', '${body.apellidoDos}', '${body.idTipoIdentificacion}', '${body.nacionalidad}', '${body.numeroIdentificacion}', 
+        VALUES ((SELECT MAX(id_pais + 1) FROM NAME_PAISES), '${body.nombreUno}', '${body.segundoNombre}', '${body.apellidoUno}', '${body.apellidoDos}', '${body.idTipoIdentificacion}', '${body.nacionalidad}', '${body.numeroIdentificacion}', 
         TO_DATE('03/05/23', 'DD/MM/RR'), 'DD', 'DD', '${body.sexo}', '${body.edoCivil}', '${body.manoDominante}', '${body.direccion}', 'DDDD', 'DDDD', '${body.telefono1}', '${body.celular}', '${body.emailUno}', 'CLIENTE', 
         TO_DATE('03/05/23', 'DD/MM/RR'), 'CLIENTE', TO_DATE('03/05/23', 'DD/MM/RR'), '0', '0', '0', '0', '0', '0', '0', '0', '0');
     COMMIT;
@@ -101,8 +101,14 @@ const nameNewLog = async (body) => {
   return rta;
 };
 
+const nameGetCountry = async () => {
+  const rta = await sequelize.query(`SELECT nombre_pais FROM NAME_PAISES`);
+  return rta;
+};
+
 module.exports = {
   querySql,
   query2Sql,
-  nameNewLog,
+  nameNewLog2,
+  nameGetCountry,
 };
