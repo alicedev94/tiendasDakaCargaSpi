@@ -20,7 +20,7 @@ const { nameNewUser } = require("../controllers/nameUsers");
 const { singUp } = require("../middlewares/singUp");
 const { singIn } = require("../middlewares/singIn");
 const { singToken, verifyToken, jwt } = require("../middlewares/serviceToken");
-const { Joi, schema } = require("../middlewares/formValidation/");
+const validateField = require("../middlewares/formValidation/");
 const passport = require("passport");
 
 // GET
@@ -55,13 +55,24 @@ router.get("/data/country", async (req, res) => {
 });
 
 // POST
+//metodo en revsión
 router.post("/nameNewLog", async (req, res) => {
-  await nameNewLog2(req.body);
+  const field = await validateField(req.body.nombreUno);
+  if (field != null) {
+    console.log(field);
+  } else {
+    await nameNewLog(req.body);
+  }
 });
 
 router.post("/taRelacionPuesto", async (req, res) => {
-  const rta = await query2Sql(req.body);
-  res.json(rta);
+  /*const field = await validateField(req.body.nombreUno);
+  if (field != null) {
+    return field;
+  } else {
+    await query2Sql(req.body);
+  }*/
+  await query2Sql(req.body);
 });
 
 router.post("/newUser", async (req, res) => {
@@ -78,14 +89,17 @@ router.post(
   })
 );
 
-router.post("/user/signin",passport.authenticate("local-signin", {
-  successRedirect: "http://localhost:3000/",
-  failureRedirect: "http://localhost:3000/login",
-  failureFlash: true,
-}), async (req, res) => {
-  res.json({auth: true});
-});
-
+router.post(
+  "/user/signin",
+  passport.authenticate("local-signin", {
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "http://localhost:3000/login",
+    failureFlash: true,
+  }),
+  async (req, res) => {
+    res.json({ auth: true });
+  }
+);
 
 // PUT
 router.put("/namePutLog/:id", async (req, res) => {

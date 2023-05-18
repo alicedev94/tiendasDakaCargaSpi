@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 const ipGet = `http://localhost:5000/api/v1/nameGetLog`; // http://192.168.25.92:5000/api/v1/nameGetLog
 const columns = [
@@ -42,6 +43,7 @@ const columns = [
 ];
 
 export default function DataGridDemo() {
+  const [bandera, setBandera] = useState(false);
   const [logs, setLogs] = useState([]);
   const [idRow, setIdRow] = useState("");
   const navigate = useNavigate();
@@ -75,10 +77,19 @@ export default function DataGridDemo() {
     window.location.reload();
   };
 
-  const bol = true;
+  //const bandera = false;
+  const clientOn = async () => {
+    if (bandera) {
+      setBandera(false);
+    } else {
+      setBandera(true);
+    }
+  };
+
+  const bol = false;
   let content;
 
-  if (bol) {
+  /*if (bol) {
     content = (
       <Button
         variant="outlined"
@@ -88,6 +99,7 @@ export default function DataGridDemo() {
       >
         ELIMINAR REGISTRO
       </Button>
+      
     );
   } else {
     content = (
@@ -100,6 +112,12 @@ export default function DataGridDemo() {
         ELIMINAR REGISTRO 2
       </Button>
     );
+  }*/
+
+  if (bandera) {
+    content = (
+      <Alert severity="success">This is a success alert — check it out!</Alert>
+    );
   }
 
   useEffect(() => {
@@ -110,6 +128,7 @@ export default function DataGridDemo() {
   return (
     <>
       <Box sx={{ height: 500, width: "100%", paddingTop: "4%" }}>
+        {content}
         <DataGrid
           rows={logs}
           columns={columns}
@@ -127,6 +146,7 @@ export default function DataGridDemo() {
         />
       </Box>
       <Button
+        style={{ marginTop: "4%" }}
         variant="outlined"
         color="success"
         disabled={false}
@@ -134,7 +154,25 @@ export default function DataGridDemo() {
       >
         EDITAR REGISTRO
       </Button>
-      {content}
+      <Button
+        style={{ marginTop: "4%" }}
+        variant="outlined"
+        color="error"
+        disabled={false}
+        onClick={handleDelete}
+      >
+        ELIMINAR REGISTRO
+      </Button>
+      <div>
+        <Button
+          variant="outlined"
+          color="success"
+          onClick={clientOn}
+          style={{ marginTop: "5%", marginLeft: "5%" }}
+        >
+          clientOn
+        </Button>
+      </div>
     </>
   );
 }

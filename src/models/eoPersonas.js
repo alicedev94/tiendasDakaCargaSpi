@@ -280,8 +280,22 @@ const nameEoPersonasSchema = {
     defaultValue: null,
     /*DescripciÃ³n de la otra discapacidad*/
   },
+  DEP_VENTAS: {
+    field: "DEP_VENTAS",
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: 0,
+    /*Empleados del departamento de ventas*/
+  },
   U_VERIFY: {
     field: "U_VERIFY",
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: 0,
+    /*Bandera de verificación por admin*/
+  },
+  TRANS_SAP: {
+    field: "TRANS_SAP",
     allowNull: false,
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
